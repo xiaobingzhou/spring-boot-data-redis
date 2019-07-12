@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Good Thymes Virtual Grocery</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../../css/gtvg.css" th:href="@{/css/gtvg.css}" />
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+	<form action="/search" th:action="@{/search}" method="get">
+		<input type="text" name="wd" /><br/>
+		<input type="submit" value="查询" /><br/>
+	</form>
+	8082
+	<table>
+		<tr>
+			<th>Key</th>
+			<th>Operation</th>
+		</tr>
+		<tr th:each="key : ${keys}">
+			<td><a href="key" th:href="@{'/'+${key}}" th:text="${key}">Key</a></td>
+			<td><a href="javascript:void(0);" class="del" th:attr="key=${key}">Del</a></td>
+		</tr>
+	</table>
+<script type="text/javascript">
+	$('.del').on("click", function(){
+		var key = $(this).attr("key");
+		if(confirm('Are you sure del this key[ '+key+' ] ?')){
+			console.log("del...");
+			$.ajax({
+				url: '/'+key,
+				type:'DELETE',
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					alert("del success");
+					location.reload();
+				}
+			})
+		}
+	});
+</script>
+</body>
+</html>

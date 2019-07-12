@@ -1,0 +1,16 @@
+#debug:
+#  true
+server:  port: 8082
+  context-path: /bell
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 1000
+    pool:
+      max-active: 600
+      max-idle: 300
+      max-wait: 1000  data:    redis:      repositories:        enabled: true  thymeleaf:    cache: false
+#    prefix: classpath:/templates  datasource:    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver    username: root
+    password: root  jpa:    hibernate:      ddl-auto: none  session:    store-type: redis
